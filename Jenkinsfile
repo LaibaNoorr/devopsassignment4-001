@@ -23,14 +23,13 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying to Azure VM...'
-        sshagent (credentials: ['your-ssh-creds-id']) {
           sh '''
             ssh -o StrictHostKeyChecking=no azureuser@<your-public-ip> "
               sudo mkdir -p /var/www/html &&
               sudo chown -R azureuser:azureuser /var/www/html &&
               rm -rf /var/www/html/* &&
               exit"
-            scp -o StrictHostKeyChecking=no index.html azureuser@<your-public-ip>:/var/www/html/
+            scp -o StrictHostKeyChecking=no index.html azureuser@<172.201.217.238 >:/var/www/html/
           '''
         }
       }
